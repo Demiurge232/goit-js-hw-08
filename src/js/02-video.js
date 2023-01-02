@@ -10,22 +10,9 @@ function currentTime(data) {
 
 player.on('timeupdate', throttle(currentTime, 1000));
 
-const savedData = localStorage.getItem(STORAGEDATA_KEY) || [];
-const seconds = JSON.parse(savedData);
+const savedData = localStorage.getItem(STORAGEDATA_KEY) || 0;
 
-player
-  .setCurrentTime(seconds)
-  .then(function (seconds) {})
-  .catch(function (error) {
-    switch (error.name) {
-      case 'RangeError':
-        break;
-
-      default:
-        break;
-    }
-  });
-
-player.getVideoTitle().then(function (title) {
-  console.log('title:', title);
-});
+if (savedData) {
+  const seconds = JSON.parse(savedData);
+  player.setCurrentTime(seconds);
+}
