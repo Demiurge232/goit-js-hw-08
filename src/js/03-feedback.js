@@ -2,7 +2,7 @@ import throttle from 'lodash.throttle';
 
 const formEl = document.querySelector('.feedback-form');
 const CURRENTTEXT_KEY = 'feedback-form-state';
-const dataset = {};
+let dataset = {};
 
 function onInputForm(evt) {
   dataset[evt.target.name] = evt.target.value;
@@ -14,6 +14,7 @@ function onFormSubmit(evt) {
   evt.currentTarget.reset();
   localStorage.removeItem(CURRENTTEXT_KEY);
   console.log(dataset);
+  dataset = {};
 }
 
 function inputAfterReload() {
